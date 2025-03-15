@@ -1,0 +1,35 @@
+replicaCount: 1
+
+image:
+  repository: summarizse-my-meet
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8000
+
+ingress:
+  enabled: false
+  className: "nginx"
+  hosts:
+    - host: summarizse-my-meet.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+env:
+  OPEN_API_KEY: "your-open-api-key"
+
+secret:
+  name: open-api-key
+  key: OPEN_API_KEY

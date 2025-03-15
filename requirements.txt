@@ -1,0 +1,12 @@
+fastapi==0.110.0
+uvicorn==0.27.1
+python-dotenv==1.0.1
+pydantic==2.6.4
+requests==2.31.0
+openai==1.65.4
+numpy==1.26.4
+tiktoken==0.6.0
+loguru==0.7.2
+rich==13.7.1
+snakemd==2.1.0
+python-multipart==0.0.20
