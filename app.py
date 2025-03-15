@@ -1,8 +1,8 @@
 from fastapi import FastAPI, Request, UploadFile, File, Form
 from fastapi.responses import JSONResponse
-from process import get_transcript
 from make_md_file import create_md_file_object
 from loguru import logger
+from process.process import TranscriptProcessor
 import uvicorn
 
 app = FastAPI(
@@ -21,7 +21,10 @@ async def summarise_the_file(file: UploadFile = File(default=None)):
     file_content = await file.read()
     file_content = str(file_content.decode('utf-8'))
     try:
-        output_data = get_transcript(file_content)
+        processor = TranscriptProcessor()
+
+        # Call the get_transcript method with file content
+        output_data = processor.get_transcript(file_content)
         md_content = create_md_file_object(output_data)
     except Exception as e:
         logger.error(f'Error: {str(e)}')
